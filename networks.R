@@ -44,7 +44,7 @@ write_csv(df, "ring_network.csv")
 g_sm <- sample_smallworld(1, 30, 5, 0.4) %>% set_vertex_attr("label", value = LETTERS[1:30])
 mean_distance(g_sm)
 transitivity(g_sm, type="average")
-degree_value_gsm <- degree(g_sm, "out")
+degree(g_sm)
 plot(g_sm, size = 0.3)
 hist(degree(g_sm))
 df <- as_long_data_frame(g_sm)
@@ -53,13 +53,13 @@ write_csv(df, "small_world_network.csv")
 
 #Scale Free Network 
 g_scale<- sample_pa(30, directed = FALSE) %>% set_vertex_attr("label", value = LETTERS[1:30])
-degree_distribution(g_scale)
+degree(g_scale)
 plot(g_scale, size = 0.2, layout = layout_with_fr)
 ends(g_scale, E(g_scale))
 hist(degree(g_scale))
 
-df <- as_long_data_frame(g_sm)
-write_csv(df, "small_world_network.csv")
+df <- as_long_data_frame(g_scale)
+write_csv(df, "scale_free_network.csv")
 
 #Lattice 
 l <- make_lattice(c(5, 10, 5))

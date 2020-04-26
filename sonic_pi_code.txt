@@ -1,0 +1,19 @@
+require 'csv'
+
+data = CSV.parse(File.read("Users/genevieverichards/Documents/scale_free_networks_two.csv"), {:headers => true, :header_converters => :symbol})
+use_bpm 100
+#print(data)
+
+# scale(t)
+# multiply t by a scaling factor to get a playable note
+# and limit to a lower minimum
+notes = scale(:c, :major, num_octaves: 5)
+
+use_synth :piano
+data.each do |line|
+  #play sample :drum_bass_soft, amp: 0.1
+  node = line[:network_reverse].to_f
+  puts line
+  play node + 60, noise: 1
+  sleep (0.5)
+end
